@@ -86,6 +86,7 @@ Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymo
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
   ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
   ":GFiles [OPTS] 	Git files (git ls-files)
@@ -289,16 +290,16 @@ set wrapscan
 
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
-  set background=light
+  "set background=light
   set rtp+=/usr/local/bin/fzf
   " TF Files in a different color
-  " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
-  autocmd BufEnter *.tf* colorscheme vim-github256
+  autocmd BufEnter *.tf* colorscheme github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
   let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
+  " TF Files in a different color
   autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 endif
 
@@ -453,8 +454,9 @@ autocmd BufEnter *.yaml :call YamlEdit()
 autocmd BufEnter *.yml :call YamlEdit()
 
 " terraform fmt
-let g:terraform_align=1
+" let g:terraform_align=1   " This is failing fmt checks for me
 let g:terraform_fold_sections=1
+let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 let g:terraform_fmt_on_save=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
