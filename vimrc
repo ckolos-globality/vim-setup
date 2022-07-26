@@ -33,6 +33,7 @@ Plug 'rakr/vim-one'
 Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Status line
 Plug 'itchyny/lightline.vim'
@@ -40,7 +41,7 @@ Plug 'itchyny/lightline.vim'
 " Syntax and file type
 Plug 'dense-analysis/ale'
 Plug 'elzr/vim-json'
-Plug 'hashivim/vim-terraform'
+" Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/gnupg.vim'
 
@@ -82,7 +83,7 @@ Plug 'ctrlpvim/ctrlp.vim'
   " Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
   " Submit two or more dots .. to go up the directory tree by one or multiple levels.
   " End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
-Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
+" Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
@@ -114,7 +115,7 @@ Plug 'junegunn/fzf.vim'
   ":Filetypes 	File types
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
-Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
+Plug 'mg979/vim-visual-multi'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
@@ -293,9 +294,9 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   "set background=light
   set rtp+=/usr/local/bin/fzf
   " TF Files in a different color
-  autocmd BufEnter *.tf* colorscheme github256
+  " autocmd BufEnter *.tf* colorscheme github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
-  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+  let g:ale_statusline_format = ['!!%d', '**%d', '⬥ ok']
   let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
@@ -376,25 +377,37 @@ xnoremap <C-H> :s/
 
 " Easymotion maps
 "
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+"map <Leader>l <Plug>(easymotion-lineforward)
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
+"map <Leader>h <Plug>(easymotion-linebackward)
+"
+"" s{char}{char} to move to {char}{char}
+"nmap <Leader>S <Plug>(easymotion-overwin-f2)
+"
+"" Move to line
+"map <Leader>L <Plug>(easymotion-bd-jk)
+"nmap <Leader>L <Plug>(easymotion-overwin-line)
+"
+"" Move to word
+"map  <Leader>w <Plug>(easymotion-bd-w)
+"nmap <Leader>w <Plug>(easymotion-overwin-w)
+"
+"" <Leader>f{char} to move to {char}
+"map  <Leader>f <Plug>(easymotion-bd-f)
+"nmap <Leader>f <Plug>(easymotion-overwin-f)
+"
+"nmap s <Plug>(easymotion-s2)
+"nmap t <Plug>(easymotion-t2)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+"
+"" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+"" Without these mappings, `n` & `N` works fine. (These mappings just provide
+"" different highlight method and have some other features )
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
 
-" s{char}{char} to move to {char}{char}
-nmap <Leader>S <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
 nnoremap <silent> <Leader>F :FZF<CR>
 nnoremap <silent> <Leader>Fb :Blines<CR>
 nnoremap <silent> <Leader>Fc :Commands<CR>
@@ -420,9 +433,12 @@ let g:EasyMotion_smartcase = 1
 let hiddens_are_shown = 0
 
 " Indent Line color settings
-let g:indentLine_setColors = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_char_list = ['┆']
+" let g:indentLine_defaultGroup = 'Comment'
 let g:indentLine_enabled = 0
+let g:indentLine_setColors = 1
+let g:indentLine_color_dark = 1
 
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
@@ -432,6 +448,7 @@ let g:vim_json_syntax_conceal = 0
 " let g:airline_powerline_fonts = 1
 
 " w0pr/ale tweaks - https://github.com/w0rp/ale
+let g:ale_python_flake8_options = "--ignore=E501,E704,W503,E123,W504,E121,E24,E226,E126"
 let g:ale_echo_msg_error_str = 'Err'
 let g:ale_echo_msg_warning_str = 'Warn'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -455,9 +472,10 @@ autocmd BufEnter *.yml :call YamlEdit()
 
 " terraform fmt
 " let g:terraform_align=1   " This is failing fmt checks for me
-let g:terraform_fold_sections=1
-let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
-let g:terraform_fmt_on_save=1
+"let g:terraform_align=1
+"let g:terraform_binary_path="/Users/chriskolosiwsky/.asdf/shims/terraform"
+"let g:terraform_fmt_on_save=1
+"let g:terraform_fold_sections=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
@@ -568,9 +586,7 @@ let g:lightline = {
       \              ['paste', 'fullfilename', 'gitbranch' ],
       \              [ ' ', 'line', 'column','percent' ],
       \            ],
-      \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
-      \              [ 'modified', 'readonly' ],
-      \            ]
+      \   'right': [ [ 'modified', 'readonly' ], ],
       \ },
       \ 'tab':  {
       \   'active': [ 'tabnum', 'filename', 'modified' ],
@@ -794,3 +810,4 @@ function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
+vmap <Leader>bg :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
