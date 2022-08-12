@@ -425,6 +425,10 @@ nnoremap <silent> <Leader>gc :call GutterClean()<CR>
 nnoremap <silent> <Leader>gu :call Gutter()<CR>
 nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
 
+nnoremap <silent> <Leader>n :tabn
+nnoremap <silent> <Leader>p :tabp
+
+
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
 
@@ -810,4 +814,8 @@ function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
+
+" Select text and hit Leader bg to see the git blame on it; Only works when
+" you're in the git repo in question
 vmap <Leader>bg :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
