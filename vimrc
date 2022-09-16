@@ -10,27 +10,27 @@ call plug#begin('~/.vim/plugged')
 "
 " Look and Feel
   " Plug 'Gabirel/molokai'
+  " Plug 'SpaceVim/vim-material'
+  " Plug 'chriskempson/vim-tomorrow-theme'
+  " Plug 'connorholyday/vim-snazzy'
   " Plug 'danilo-augusto/vim-afterglow'
   " Plug 'doums/darcula'
+  " Plug 'icymind/NeoSolarized'
+  " Plug 'itchyny/landscape.vim'
   " Plug 'john2x/flatui.vim'
+  " Plug 'jnurmine/zenburn'
   " Plug 'pkukulak/idle'
+  " Plug 'srcery-colors/srcery-vim'
   " Plug 'vim-scripts/ibmedit.vim'
   " Plug 'w0ng/vim-hybrid'
-Plug 'SpaceVim/vim-material'
 Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ckolos/blue-mood-vim'
 Plug 'ckolos/onedark.vim'
-Plug 'connorholyday/vim-snazzy'
-Plug 'icymind/NeoSolarized'
-Plug 'itchyny/landscape.vim'
-Plug 'jnurmine/zenburn'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'rakr/vim-one'
-Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -116,7 +116,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
 Plug 'mg979/vim-visual-multi'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " used to trigger the FileType event
@@ -297,7 +297,6 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   " autocmd BufEnter *.tf* colorscheme github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['!!%d', '**%d', '⬥ ok']
-  let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
   " TF Files in a different color
@@ -327,6 +326,12 @@ noremap \p "+p
 " Use space to toggle folds
 nnoremap <Space> za
 vnoremap <Space> za
+
+" Tab movement
+nnoremap L  :tabnext<CR>
+nnoremap H  :tabprev<CR>
+map <Leader>n :tabnext<CR><ESC>
+map <Leader>p :tabprev<CR><ESC>
 
 " (i)map - insertion mode maps
 imap <TAB> <C-N>
@@ -479,7 +484,7 @@ autocmd BufEnter *.yml :call YamlEdit()
 "let g:terraform_align=1
 "let g:terraform_binary_path="/Users/chriskolosiwsky/.asdf/shims/terraform"
 "let g:terraform_fmt_on_save=1
-"let g:terraform_fold_sections=1
+"let g:terraform_fold_sections=0
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
