@@ -83,7 +83,9 @@ Plug 'ctrlpvim/ctrlp.vim'
   " Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
   " Submit two or more dots .. to go up the directory tree by one or multiple levels.
   " End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
-" Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
+"
+"https://github.com/easymotion/vim-easymotion
+"Plug 'easymotion/vim-easymotion' 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
@@ -117,6 +119,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
 Plug 'mg979/vim-visual-multi'
 "Plug 'Yggdroot/indentLine'
+Plug 'bfrg/vim-jqplay'
 call plug#end()
 
 " used to trigger the FileType event
@@ -297,6 +300,7 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   " autocmd BufEnter *.tf* colorscheme github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['!!%d', '**%d', '⬥ ok']
+  autocmd BufEnter *.ctest set ft=python
 else
   set background=dark
   " TF Files in a different color
@@ -554,8 +558,6 @@ set wildignore+=*.orig " Merge resolution files
 " nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Toggle GitGutter with leader g
 nmap <silent> <Leader>g :GitGutterToggle<CR>
-" Toggle IndentLines with leader i
-nmap <silent> <Leader>i :IndentLinesToggle<cr>
 " Show cursorcolumn with leader c
 nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Use leader-f to call :FZFNeigh
@@ -592,7 +594,7 @@ let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left':  [ [ 'mode' ],
-      \              ['paste', 'fullfilename', 'gitbranch' ],
+      \              ['paste', 'relativepath','filename', 'gitbranch' ],
       \              [ ' ', 'line', 'column','percent' ],
       \            ],
       \   'right': [ [ 'modified', 'readonly' ], ],
@@ -750,7 +752,6 @@ function! GutterClean() abort
   let g:guttercleaned = 1
   :ALEDisable
   :GitGutterDisable
-  :IndentLinesDisable
   set norelativenumber
   set nonumber
 endfunction
@@ -759,7 +760,6 @@ function! Gutter() abort
   let g:noguttercleaned = 0
   :ALEEnable
   :GitGutterEnable
-  :IndentLinesEnable
   set relativenumber
   set number
 endfunction
@@ -820,7 +820,11 @@ function! YamlEdit() abort
     :colorscheme blue-mood
 endfunction
 
-" Select text and hit Leader bg to see the git blame on it; Only works when
-" you're in the git repo in question
-vmap <Leader>bg :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
+noremap <silent> <Leader>gb  :call GitBlame()<CR>
+
+function! GitBlame() abort
+ :Git blame
+endfunction
+
+  
