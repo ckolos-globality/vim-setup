@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
-HERE=$PWD
 VIMDIR="$HOME/.vim"
 VIMRC="$HOME/.vimrc"
-BUNDLEDIR="$VIMDIR/bundle"
 
-if echo $HERE | grep -q vim-setup; then
-  :
-else
-  HERE="$HERE/vim-setup"
-fi
+INSTALLDIR=$(dirname $(python -c 'import os, sys; print(f"{os.path.realpath(sys.argv[1])}")' $0))
+echo "CHECKOUTDIR = $INSTALLDIR"
 
-cd $HOME
-test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
-test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
-ln -s $HERE $HOME/.vim
-ln -s $HERE/vimrc $HOME/.vimrc
-curl -fLo ${VIMDIR}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+pushd $HOME
+pwd
+test -f  "$VIMRC" && echo /bin/mv "${VIMRC}" "${VIMRC}.bak"
+test -f "$VIMDIR" && echo /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
+echo ln -s $INSTALLDIR $VIMDIR
+echo ln -s $INSTALLDIR/vimrc $VIMRC
+echo curl -fLo ${VIMDIR}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+popd
