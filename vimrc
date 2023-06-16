@@ -8,51 +8,38 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 "
-" Look and Feel
-  " Plug 'Gabirel/molokai'
-  " Plug 'SpaceVim/vim-material'
-  " Plug 'chriskempson/vim-tomorrow-theme'
-  " Plug 'connorholyday/vim-snazzy'
-  " Plug 'danilo-augusto/vim-afterglow'
-  " Plug 'doums/darcula'
-  " Plug 'icymind/NeoSolarized'
-  " Plug 'itchyny/landscape.vim'
-  " Plug 'john2x/flatui.vim'
-  " Plug 'jnurmine/zenburn'
-  " Plug 'pkukulak/idle'
-  " Plug 'srcery-colors/srcery-vim'
-  " Plug 'vim-scripts/ibmedit.vim'
-  " Plug 'w0ng/vim-hybrid'
-Plug 'adrian5/oceanic-next-vim'
-Plug 'antlypls/vim-colors-codeschool'
-Plug 'arcticicestudio/nord-vim'
-Plug 'ckolos/blue-mood-vim'
-Plug 'ckolos/onedark.vim'
-Plug 'neutaaaaan/iosvkem'
-Plug 'notpratheek/vim-luna'
-Plug 'rakr/vim-one'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'vim-scripts/wombat256.vim'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme' " Look and feel
+Plug 'adrian5/oceanic-next-vim' " Look and feel
+Plug 'airblade/vim-gitgutter' " Git
+Plug 'antlypls/vim-colors-codeschool' " Look and feel
+Plug 'arcticicestudio/nord-vim' " Look and feel
+Plug 'bfrg/vim-jqplay' " Misc
+Plug 'ckolos/blue-mood-vim' " Look and feel
+Plug 'ckolos/onedark.vim' " Look and feel
+Plug 'dense-analysis/ale' " Syntax
+Plug 'editorconfig/editorconfig-vim' " Misc
+Plug 'edkolev/tmuxline.vim' " Misc
+Plug 'elzr/vim-json' " Syntax
+Plug 'frazrepo/vim-rainbow' " Look and feel
+Plug 'godlygeek/tabular' " Misc
+Plug 'hashivim/vim-terraform' " Syntax
+Plug 'itchyny/lightline.vim' " Status line
+Plug 'junegunn/gv.vim' " Git https://github.com/junegunn/gv.vim
+Plug 'mg979/vim-visual-multi' " Misc
+Plug 'mhinz/vim-startify' " Misc
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code Completion
+Plug 'neutaaaaan/iosvkem' " Look and feel
+Plug 'notpratheek/vim-luna' " Look and feel
+Plug 'preservim/nerdcommenter' " Misc
+Plug 'preservim/nerdtree' " Misc
+Plug 'preservim/vim-indent-guides' " Look and feel
+Plug 'rakr/vim-one' " Look and feel
+Plug 'sheerun/vim-polyglot' " Syntax
+Plug 'tpope/vim-fugitive' " Git https://github.com/tpope/vim-fugitive/blob/master/doc/fugitive.txt
+Plug 'tyrannicaltoucan/vim-deep-space' " Look and feel
+Plug 'vim-scripts/gnupg.vim' " Syntax
+Plug 'vim-scripts/wombat256.vim' " Look and feel
 
-" Status line
-Plug 'itchyny/lightline.vim'
-
-" Syntax and file type
-Plug 'dense-analysis/ale'
-Plug 'elzr/vim-json'
-" Plug 'hashivim/vim-terraform'
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/gnupg.vim'
-
-" Git Shit
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/gv.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-" Misc
-Plug 'chrisbra/NrrwRgn'
   " :NR  - Open the selected region in a new narrowed window
   " :NW  - Open the current visual window in a new narrowed window
   " :WR  - (In the narrowed window) write the changes back to the original buffer.
@@ -63,7 +50,8 @@ Plug 'chrisbra/NrrwRgn'
   " :NRS - Enable Syncing the buffer content back (default on)
   " :NRN - Disable Syncing the buffer content back
   " :NRL - Reselect the last selected region and open it again in a narrowed window
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'chrisbra/NrrwRgn' " Misc
+
   " Basic Usage
   " Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
   " Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
@@ -83,14 +71,10 @@ Plug 'ctrlpvim/ctrlp.vim'
   " Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
   " Submit two or more dots .. to go up the directory tree by one or multiple levels.
   " End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
-"
+Plug 'ctrlpvim/ctrlp.vim' " Misc
+
 "https://github.com/easymotion/vim-easymotion
 "Plug 'easymotion/vim-easymotion' 
-Plug 'editorconfig/editorconfig-vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
   ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
   ":GFiles [OPTS] 	Git files (git ls-files)
   ":GFiles? 	Git files (git status)
@@ -115,13 +99,9 @@ Plug 'junegunn/fzf.vim'
   ":Maps 	Normal mode mappings
   ":Helptags 	Help tags 1
   ":Filetypes 	File types
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'mhinz/vim-startify'
-Plug 'mg979/vim-visual-multi'
-"Plug 'Yggdroot/indentLine'
-Plug 'bfrg/vim-jqplay'
+Plug 'junegunn/fzf' " Misc
+Plug 'junegunn/fzf.vim' " Misc
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " used to trigger the FileType event
@@ -139,8 +119,6 @@ else
   set termguicolors " 24-bit terminal
   let &t_8f = "[38;2;%lu;%lu;%lum"
   let &t_8b = "[48;2;%lu;%lu;%lum"
-  "colorscheme monokai-phoenix
-  " colorscheme Iosvkem
   colorscheme onedark
 endif
 
@@ -241,13 +219,6 @@ set showcmd
 " Highlight matches of search operations
 set showmatch
 
-" Show the current mode of operation APPEND/INSERT/VISUAL etc
-" set showmode
-
-" insert indentation auto-magically when a c-like word is used; usually
-" doesn't work as expected for me.
-" set smartindent
-
 " Number of spaces per tab character when editing
 " can be overridden by the filetype
 set softtabstop=2
@@ -297,7 +268,7 @@ set wrapscan
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
   "set background=light
-  set rtp+=/usr/local/bin/fzf
+  set rtp+=/Users/ckolos/.asdf/shims/fzf
   " TF Files in a different color
   " autocmd BufEnter *.tf* colorscheme github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
@@ -557,7 +528,7 @@ let g:indent_guides_guide_size=4
 
 " Rainbow parentheses settings
 let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -882,4 +853,4 @@ function! GitBlame() abort
  :Git blame
 endfunction
 
-  
+let g:rainbow_active = 1 
