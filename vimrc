@@ -74,7 +74,7 @@ Plug 'chrisbra/NrrwRgn' " Misc
 Plug 'ctrlpvim/ctrlp.vim' " Misc
 
 "https://github.com/easymotion/vim-easymotion
-"Plug 'easymotion/vim-easymotion' 
+"Plug 'easymotion/vim-easymotion'
   ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
   ":GFiles [OPTS] 	Git files (git ls-files)
   ":GFiles? 	Git files (git status)
@@ -358,10 +358,10 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " Tab movement
-nnoremap L  :tabnext<CR>
-nnoremap H  :tabprev<CR>
-map <Leader>n :tabnext<CR><ESC>
-map <Leader>p :tabprev<CR><ESC>
+" nmap <Leader>n :tabnext<CR><CR>
+" nmap <Leader>p :tabprev<CR><CR>
+nmap <silent> <Leader>n :tabn<CR><CR>
+nmap <silent> <Leader>p :tabp<CR><CR>
 
 " (i)map - insertion mode maps
 imap <TAB> <C-N>
@@ -460,8 +460,6 @@ nnoremap <silent> <Leader>gc :call GutterClean()<CR>
 nnoremap <silent> <Leader>gu :call Gutter()<CR>
 nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
 
-nnoremap <silent> <Leader>n :tabn
-nnoremap <silent> <Leader>p :tabp
 
 
 " Decrease indent level in insert mode with shift+tab
@@ -493,11 +491,12 @@ let g:ale_echo_msg_warning_str = 'Warn'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = 'E!'
 let g:ale_sign_warning = 'W.'
+let g:ale_fix_on_save = 1
 let g:ale_linters = {
       \   'python': ['flake8', 'yapf'],
       \}
 let g:ale_fixers = {
-      \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
+      \   '*':      ['remove_trailing_lines', 'trim_whitespace', 'prettier'],
       \   'python': ['add_blank_lines_for_python_control_statements',
       \              'black', 'isort', 'trim_whitespace'],
       \}
@@ -853,4 +852,4 @@ function! GitBlame() abort
  :Git blame
 endfunction
 
-let g:rainbow_active = 1 
+let g:rainbow_active = 1
