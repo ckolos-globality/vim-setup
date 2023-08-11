@@ -24,6 +24,7 @@ Plug 'frazrepo/vim-rainbow' " Look and feel
 Plug 'godlygeek/tabular' " Misc
 Plug 'hashivim/vim-terraform' " Syntax
 Plug 'itchyny/lightline.vim' " Status line
+Plug 'maximbaz/lightline-ale' " Ale in the lightline status line
 Plug 'junegunn/gv.vim' " Git https://github.com/junegunn/gv.vim
 Plug 'mg979/vim-visual-multi' " Misc
 Plug 'mhinz/vim-startify' " Misc
@@ -618,15 +619,24 @@ let g:netrw_winsize = 75
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
-      \   'left':  [ [ 'mode' ],
-      \              ['paste', 'relativepath','filename', 'gitbranch' ],
-      \              [ ' ', 'line', 'column','percent' ],
+      \   'left':  [
+      \              [ 'mode' ],
+      \              [ 'paste', 'relativepath','filename', 'gitbranch' ],
+      \              [ ' ', 'line', 'column','percent'],
       \            ],
-      \   'right': [ [ 'modified', 'readonly' ], ],
+      \   'right': [
+      \              [ 'modified', 'readonly', ' '],
+      \              [ 'fileformat', 'fileencoding', 'filetype'],
+      \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', ' '],
+      \            ],
       \ },
       \ 'tab':  {
-      \   'active': [ 'tabnum', 'filename', 'modified' ],
-      \   'inactive': [ 'tabnum', 'filename', 'modified' ]
+      \   'active': [
+      \                'tabnum', 'filename', 'modified'
+      \             ],
+      \   'inactive': [
+      \                'tabnum', 'filename', 'modified'
+      \             ]
       \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
@@ -650,6 +660,22 @@ let g:lightline = {
       \ },
     \ }
 
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+let g:airline#extensions#ale#enabled = 1
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 command! FZFNeigh call s:fzf_neighbouring_files()
 
@@ -842,7 +868,7 @@ endfunction
 
 function! YamlEdit() abort
     set cursorcolumn
-    :colorscheme blue-mood
+    :colorscheme luna
 endfunction
 
 
