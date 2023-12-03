@@ -71,7 +71,10 @@ Plug 'chrisbra/NrrwRgn' " Misc
   " Use <c-z> to mark/unmark multiple files and <c-o> to open them.
   " Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
   " Submit two or more dots .. to go up the directory tree by one or multiple levels.
-  " End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
+  " End the input string with a colon : followed by a command to execute it on
+  "  the opening file(s)
+  "  : Use :25 to jump to line 25.
+  " Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
 Plug 'ctrlpvim/ctrlp.vim' " Misc
 
 "https://github.com/easymotion/vim-easymotion
@@ -196,7 +199,7 @@ set nowb
 set nowrap
 
 " turn on line-numbering and relative line number
-set number relativenumber
+set number " relativenumber
 
 " always tell me how many lines were changed when running s/g/ etc.
 set report=0
@@ -287,6 +290,8 @@ iab CCK  <TAB>Chris Kolosiwsky
 iab CLM <TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab CMB <TAB>Modified By:<TAB>Chris Kolosiwsky<CR>
 iab HEA #<TAB>File: <C-R>bufname("%")<CR><CR>#<CR>#<TAB>Chris Kolosiwsky<CR><TAB>#Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>#<TAB>License: GNU Public License (http://www.gnu.org/copyleft/gpl.html)
+iab parmeter parameter
+iab enviornment environment
 
 " Some useful mapping to make search results appear in the middle of the
 " screen.
@@ -355,8 +360,8 @@ endfunction
 
 
 " Use space to toggle folds
-nnoremap <Space> za
-vnoremap <Space> za
+nnoremap <Space> zO
+vnoremap <Space> zO
 
 " Tab movement
 " nmap <Leader>n :tabnext<CR><CR>
@@ -617,7 +622,7 @@ let g:netrw_winsize = 75
 "augroup END
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left':  [
       \              [ 'mode' ],
@@ -868,14 +873,36 @@ endfunction
 
 function! YamlEdit() abort
     set cursorcolumn
-    :colorscheme luna
+    colorscheme oceanicnext
+    let &stl=&stl
 endfunction
 
 
 noremap <silent> <Leader>gb  :call GitBlame()<CR>
-
 function! GitBlame() abort
  :Git blame
 endfunction
 
 let g:rainbow_active = 1
+let g:VM_mouse_mappings = 1
+"
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+
+if stridx(&runtimepath, expand(vimDir)) == -1
+  " vimDir is not on runtimepath, add it
+  let &runtimepath.=','.vimDir
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undolevels=1000         " How many undos
+    set undoreload=10000        " number of lines to save for undo
+    set undofile
+endif
+
